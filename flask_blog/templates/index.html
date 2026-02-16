@@ -1,0 +1,145 @@
+<!--
+    Flask 博客系统 - 首页模板
+    显示文章列表，支持分页
+-->
+{% extends 'base.html' %}
+
+<!-- 页面标题 -->
+{% block title %}首页 - 我的博客{% endblock %}
+
+<!-- 主内容区 -->
+{% block content %}
+
+<!-- 欢迎语 -->
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold">欢迎来到我的博客</h1>
+        <p class="col-md-8 fs-4 text-muted">分享技术经验，记录生活点滴。探索编程世界，一起成长进步。</p>
+    </div>
+</div>
+
+<!-- 文章列表 -->
+{% if posts %}
+    {% for post in posts %}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <!-- 文章标题 -->
+            <h2 class="card-title">
+                <a href="{{ url_for('post_detail', post_id=post.id) }}" class="text-decoration-none text-dark">
+                    {{ post.title }}
+                </a>
+            </h2>
+
+            <!-- 文章元信息：作者、日期、分类、浏览量 -->
+            <div class="text-muted mb-3">
+                <small>
+                    <i class="bi bi-calendar3 me-1"></i>
+                    {{ post.created_at.strftime('%Y年%m月%d日') }}
+
+                    <span class="mx-2">|</span>
+
+                    <i class="bi bi-folder me-1"></i>
+                    <a href="{{ url_for('category_posts', category_id=post.category.id) }}" class="text-muted">
+                        {{ post.category.name }}
+                    </a>
+
+                    <span class="mx-2">|</span>
+
+                    <i class="bi bi-eye me-1"></i>
+                    {{ post.views }} 次阅读
+
+                    <span class="mx-2">|</span>
+
+                    <i class="bi bi-chat-dots me-1"></i>
+                    {{ post.comment_count }} 条评论
+                </small>
+            </div>
+
+            <!-- 文章摘要 -->
+            <p class="card-text">
+                {{ post.summary }}
+            </p>
+
+            <!-- 文章标签 -->
+            {% if post.tags.count() > 0 %}
+            <div class="mb-3">
+                {% for tag in post.tags %}
+                    <a href="{{ url_for('tag_posts', tag_id=tag.id) }}" class="badge bg-secondary text-decoration-none me-1">
+                        <i class="bi bi-tag me-1"></i>{{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- 阅读更多按钮 -->
+            <a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn btn-primary">
+                阅读全文 <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- 分页导航 -->
+    {% if pagination.pages > 1 %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <!-- 上一页按钮 -->
+            {% if pagination.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=pagination.prev_num) }}">
+                    <i class="bi bi-chevron-left"></i> 上一页
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link"><i class="bi bi-chevron-left"></i> 上一页</span>
+            </li>
+            {% endif %}
+
+            <!-- 页码列表 -->
+            {% for page_num in pagination.iter_pages(left_edge=1, left_current=2, right_current=2, right_edge=1) %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+                    </li>
+                    {% endif %}
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- 下一页按钮 -->
+            {% if pagination.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=pagination.next_num) }}">
+                    下一页 <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">下一页 <i class="bi bi-chevron-right"></i></span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+{% else %}
+    <!-- 没有文章时的提示 -->
+    <div class="text-center py-5">
+        <i class="bi bi-inbox display-1 text-muted"></i>
+        <p class="mt-3 text-muted">暂无文章，快去后台写一篇吧！</p>
+        <a href="{{ url_for('admin_post_add') }}" class="btn btn-primary">
+            <i class="bi bi-pencil-square me-1"></i>写文章
+        </a>
+    </div>
+{% endif %}
+
+{% endblock %}

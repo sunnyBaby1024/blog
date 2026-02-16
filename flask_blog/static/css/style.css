@@ -1,0 +1,583 @@
+/**
+ * Flask 博客系统 - 哆啦A梦主题样式
+ * Doraemon Theme CSS
+ */
+
+/* ==================== 哆啦A梦配色方案 ==================== */
+:root {
+    /* 哆啦A梦主色调 */
+    --dora-blue: #0093D6;        /* 哆啦A梦蓝 */
+    --dora-blue-dark: #0077B3;   /* 深蓝 */
+    --dora-blue-light: #4DB8E8;  /* 浅蓝 */
+    --dora-yellow: #FFD700;      /* 铃铛黄 */
+    --dora-yellow-light: #FFE55C; /* 浅黄 */
+    --dora-red: #E60033;         /* 鼻子红 */
+    --dora-white: #FFFFFF;       /* 白色 */
+    --dora-gray: #F5F5F5;        /* 浅灰背景 */
+}
+
+/* ==================== 导入字体 ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ==================== 全局样式 ==================== */
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 页面基础样式 - 哆啦A梦蓝渐变背景 */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #E1F5FE 100%);
+    background-attachment: fixed;
+}
+
+/* 主内容区 */
+.container {
+    flex: 1;
+}
+
+/* ==================== 导航栏 - 哆啦A梦蓝 ==================== */
+
+.navbar {
+    background: linear-gradient(135deg, var(--dora-blue) 0%, var(--dora-blue-dark) 100%) !important;
+    box-shadow: 0 4px 15px rgba(0, 147, 214, 0.3);
+    border-bottom: 4px solid var(--dora-yellow);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.navbar-brand i {
+    color: var(--dora-yellow);
+    font-size: 1.8rem;
+}
+
+.nav-link {
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 8px 16px !important;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 下拉菜单样式 */
+.dropdown-menu {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 147, 214, 0.2);
+    border: 2px solid var(--dora-blue-light);
+}
+
+.dropdown-item {
+    border-radius: 10px;
+    margin: 4px 8px;
+    width: auto;
+    font-weight: 600;
+    color: var(--dora-blue-dark);
+}
+
+.dropdown-item:hover {
+    background-color: var(--dora-blue-light);
+    color: white;
+}
+
+/* 搜索框样式 */
+.navbar .form-control {
+    border-radius: 25px;
+    border: 2px solid var(--dora-yellow);
+    padding-left: 15px;
+}
+
+.navbar .btn-outline-light {
+    border-radius: 25px;
+    border: 2px solid var(--dora-yellow);
+    color: var(--dora-yellow);
+}
+
+.navbar .btn-outline-light:hover {
+    background-color: var(--dora-yellow);
+    color: var(--dora-blue);
+}
+
+/* ==================== 文章卡片样式 - 圆润可爱风 ==================== */
+
+.card {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 5px 20px rgba(0, 147, 214, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background: white;
+}
+
+.card:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 15px 40px rgba(0, 147, 214, 0.2) !important;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* 文章标题 - 圆润粗体 */
+.card-title {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--dora-blue-dark);
+}
+
+.card-title a {
+    transition: all 0.3s ease;
+}
+
+.card-title a:hover {
+    color: var(--dora-blue) !important;
+    text-decoration: none;
+}
+
+/* 卡片头部装饰 */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--dora-blue) 0%, var(--dora-yellow) 50%, var(--dora-blue) 100%);
+}
+
+/* ==================== 按钮样式 - 哆啦A梦蓝 ==================== */
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--dora-blue) 0%, var(--dora-blue-dark) 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 147, 214, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 147, 214, 0.4);
+    background: linear-gradient(135deg, var(--dora-blue-dark) 0%, var(--dora-blue) 100%);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--dora-blue);
+    color: var(--dora-blue);
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--dora-blue);
+    border-color: var(--dora-blue);
+}
+
+/* ==================== 文章详情页样式 ==================== */
+
+.post-content {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #333;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    color: var(--dora-blue-dark);
+}
+
+.post-content h1 {
+    font-size: 2rem;
+    border-bottom: 4px solid var(--dora-yellow);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.post-content h2 {
+    font-size: 1.6rem;
+    color: var(--dora-blue);
+}
+
+.post-content h3 {
+    font-size: 1.4rem;
+}
+
+.post-content p {
+    margin-bottom: 1.2rem;
+}
+
+.post-content a {
+    color: var(--dora-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid var(--dora-yellow);
+    transition: all 0.3s ease;
+}
+
+.post-content a:hover {
+    background-color: var(--dora-yellow);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+/* 代码块样式 - 四次元口袋风格 */
+.post-content pre {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+    padding: 1.5rem;
+    border-radius: 20px;
+    overflow-x: auto;
+    border: 3px solid var(--dora-blue-light);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.post-content pre::before {
+    content: '🔔';
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    font-size: 24px;
+    background: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--dora-yellow);
+}
+
+.post-content code {
+    background-color: #E3F2FD;
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: var(--dora-blue-dark);
+    font-weight: 600;
+}
+
+.post-content pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* 引用块样式 - 任意门风格 */
+.post-content blockquote {
+    border-left: 5px solid var(--dora-red);
+    padding: 1.5rem;
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    color: #555;
+    font-style: italic;
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFFDE7 100%);
+    border-radius: 0 20px 20px 0;
+    position: relative;
+}
+
+.post-content blockquote::before {
+    content: '🚪';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    opacity: 0.5;
+}
+
+/* 图片样式 - 圆润相框 */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    margin: 1.5rem 0;
+    border: 5px solid white;
+    box-shadow: 0 5px 20px rgba(0, 147, 214, 0.2);
+}
+
+/* ==================== 评论区域样式 ==================== */
+
+.comments-list {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.comments-list .rounded-circle {
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--dora-blue) 0%, var(--dora-blue-light) 100%) !important;
+    border: 3px solid var(--dora-yellow);
+}
+
+.comment-form {
+    background: linear-gradient(135deg, #E3F2FD 0%, #F5F5F5 100%);
+    border-radius: 20px;
+    padding: 25px;
+    border: 3px dashed var(--dora-blue-light);
+}
+
+/* ==================== 侧边栏样式 ==================== */
+
+.card .card-header {
+    font-weight: 800;
+    font-size: 1.1rem;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 15px 20px;
+}
+
+/* 个人简介卡片 - 哆啦A梦风格 */
+.card.mb-4 .card-body.text-center {
+    background: linear-gradient(135deg, white 0%, #E3F2FD 100%);
+}
+
+.card.mb-4 img.rounded-circle {
+    border: 5px solid var(--dora-yellow);
+    box-shadow: 0 5px 15px rgba(0, 147, 214, 0.3);
+}
+
+/* 标签云样式 - 铃铛样式 */
+.badge {
+    font-weight: 600;
+    padding: 0.6em 1em;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.badge.bg-secondary {
+    background: linear-gradient(135deg, var(--dora-blue-light) 0%, var(--dora-blue) 100%) !important;
+}
+
+.badge:hover {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* 热门文章徽章 */
+.badge.bg-danger {
+    font-size: 0.75em;
+    background: linear-gradient(135deg, var(--dora-red) 0%, #FF6B6B 100%) !important;
+    border-radius: 15px;
+}
+
+/* ==================== 分页样式 ==================== */
+
+.pagination .page-link {
+    border-radius: 15px;
+    margin: 0 3px;
+    color: var(--dora-blue);
+    font-weight: 600;
+    border: 2px solid transparent;
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, var(--dora-blue) 0%, var(--dora-blue-dark) 100%);
+    border-color: var(--dora-yellow);
+    box-shadow: 0 4px 10px rgba(0, 147, 214, 0.3);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--dora-yellow);
+    border-color: var(--dora-yellow);
+    color: var(--dora-blue-dark);
+    transform: translateY(-2px);
+}
+
+/* ==================== 页脚 - 哆啦A梦蓝 ==================== */
+
+footer {
+    margin-top: auto;
+    background: linear-gradient(135deg, var(--dora-blue-dark) 0%, var(--dora-blue) 100%) !important;
+    border-top: 5px solid var(--dora-yellow);
+    position: relative;
+}
+
+footer::before {
+    content: '🔔';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    background: var(--dora-yellow);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--dora-blue);
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: var(--dora-yellow) !important;
+}
+
+/* ==================== 表单样式 ==================== */
+
+.form-control {
+    border-radius: 15px;
+    border: 2px solid #E0E0E0;
+    padding: 12px 15px;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: var(--dora-blue);
+    box-shadow: 0 0 0 0.25rem rgba(0, 147, 214, 0.25);
+}
+
+.form-label {
+    font-weight: 700;
+    color: var(--dora-blue-dark);
+}
+
+/* ==================== 哆啦A梦装饰元素 ==================== */
+
+/* 文章分隔装饰 */
+.card.mb-4::after {
+    content: '';
+    display: block;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--dora-blue) 0px,
+        var(--dora-blue) 10px,
+        var(--dora-yellow) 10px,
+        var(--dora-yellow) 20px
+    );
+    margin: 0 -25px -25px -25px;
+    opacity: 0.3;
+}
+
+/* 侧边栏装饰 */
+.col-lg-4 .card {
+    position: relative;
+}
+
+.col-lg-4 .card::after {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    opacity: 0.5;
+}
+
+/* ==================== 响应式优化 ==================== */
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .post-content {
+        font-size: 1rem;
+    }
+
+    .post-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .post-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .post-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .col-lg-4 {
+        margin-top: 2rem;
+    }
+
+    .btn {
+        padding: 8px 20px;
+    }
+}
+
+/* ==================== 动画效果 ==================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.alert {
+    animation: fadeIn 0.3s ease-out;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 悬浮动画 */
+.navbar-brand i {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+    .navbar,
+    .col-lg-4,
+    footer,
+    .comment-form,
+    .btn {
+        display: none !important;
+    }
+
+    .post-content {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    body {
+        background: white !important;
+    }
+}

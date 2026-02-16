@@ -1,0 +1,22 @@
+# Conda 环境配置文件
+# 使用方法: conda env create -f environment.yml
+# 激活环境: conda activate flask_blog
+
+name: flask_blog
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python 版本
+  - python=3.9
+
+  # pip 用于安装不在 conda 仓库中的包
+  - pip
+
+  # 通过 pip 安装的包
+  - pip:
+    - Flask==2.3.3
+    - Flask-SQLAlchemy==3.0.5
+    - Werkzeug==2.3.7
+    - gunicorn==21.2.0
+    - python-dotenv==1.0.0

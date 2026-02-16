@@ -1,0 +1,137 @@
+<!--
+    Flask 博客系统 - 后台分类管理
+    分类的增删改查
+-->
+{% extends 'admin/base.html' %}
+
+{% block title %}分类管理{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="bi bi-folder me-2"></i>分类管理</h2>
+</div>
+
+<div class="row">
+    <!-- 添加分类表单 -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-plus-circle me-2"></i>添加分类
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin_category_add') }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">分类名称 *</label>
+                        <input type="text" class="form-control" id="name" name="name" required
+                               placeholder="请输入分类名称">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">分类描述</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"
+                                  placeholder="可选，简短描述该分类"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-plus-lg me-1"></i>添加分类
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分类列表 -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-list me-2"></i>分类列表
+            </div>
+            <div class="card-body">
+                {% if categories %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名称</th>
+                                <th>描述</th>
+                                <th>文章数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>
+                                    <span class="badge bg-primary">{{ category.name }}</span>
+                                </td>
+                                <td>
+                                    {% if category.description %}
+                                        {{ category.description }}
+                                    {% else %}
+                                        <span class="text-muted">无描述</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="badge bg-secondary">{{ category.post_count }}</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                            data-bs-target="#editModal{{ category.id }}">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger"
+                                            onclick="if(confirmDelete()) document.getElementById('delete-form-{{ category.id }}').submit();"
+                                            {{ 'disabled' if category.post_count > 0 else '' }}>
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    <form id="delete-form-{{ category.id }}"
+                                          action="{{ url_for('admin_category_delete', category_id=category.id) }}"
+                                          method="POST" style="display: none;">
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4 text-muted">
+                    <i class="bi bi-inbox display-4"></i>
+                    <p class="mt-2">暂无分类</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑分类模态框 -->
+{% for category in categories %}
+<div class="modal fade" id="editModal{{ category.id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">编辑分类</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{{ url_for('admin_category_edit', category_id=category.id) }}">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">分类名称 *</label>
+                        <input type="text" class="form-control" name="name" value="{{ category.name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">分类描述</label>
+                        <textarea class="form-control" name="description" rows="3">{{ category.description or '' }}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">保存修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
