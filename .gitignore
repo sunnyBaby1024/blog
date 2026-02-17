@@ -49,3 +49,6 @@ instance/
 
 # Claude Code
 .claude/settings.local.json
+
+# playwright
+.playwright-mcp/
